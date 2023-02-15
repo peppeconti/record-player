@@ -9,14 +9,8 @@ const Plate = () => {
 
     return (
         <div className={classes.plate}>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-            <div/>
+            <div className={classes.label} />
+            {Array.from({length: 10}).map(() =>  <div className={classes.groove}/>)}
         </div>
     );
 }
