@@ -1,7 +1,9 @@
 .base {
     height: 450px;
-    width: 650px;
+    width: 590px;
     border-radius: 2rem;
     background-color: #C4222F;
-    box-shadow: 0 1.5rem 0 #8f1923;
+    box-shadow: 0 1.5rem 0 #770E1A;
+    position: relative;
+    transform: scale(1);
 }
