@@ -1,0 +1,22 @@
+.platter {
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background-color: #3d3d3d;
+    box-shadow: .25rem .15rem .5rem #000;
+
+    &::after {
+        content: '';
+        width: 15px;
+        height: 15px;
+        border-radius: inherit;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #eeeeee;
+    }
+}

@@ -1,0 +1,21 @@
+.plate {
+    position: absolute;
+    top: 2rem;
+    left: 3rem;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    z-index: 1;
+    border: 190px solid #1d1d1d;
+}
+
+.plate:nth-child(1) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: inherit;
+    border: 1px solid #c0c0c0;
+    width: 20%;
+    height: 20%;
+}
