@@ -11,7 +11,7 @@ $color3: rgb(224, 223, 223);
     border-radius: 50%;
     background-color: $color1;
     box-shadow: .15rem .05rem .25rem #000;
-    animation: swing ease-in-out 1s infinite alternate;
+    animation: swing ease-in-out .8s infinite alternate;
     z-index: 1;
 
     .tonearm {
@@ -50,39 +50,65 @@ $color3: rgb(224, 223, 223);
             .headshell {
                 position: absolute;
                 left: 50%;
-                bottom: -15px;
-                height: 20px;
-                width: 70px;
-                background-color: #fff;
-                border-top-right-radius: .5rem;
-                border-bottom-right-radius: .5rem;
-                border-top-left-radius: 2rem;
-                border-bottom-left-radius: 2rem;
+                bottom: -7px;
+                height: 15px;
+                width: 60px;
                 overflow: hidden;
-                transform: translateX(-50%) rotate(-35deg);
+                transform: translateX(-50%) rotate(-45deg);
 
                 span {
                     position: absolute;
+
                 }
 
                 span:nth-child(1) {
                     top: 50%;
                     transform: translateY(-50%);
-                    height: 7px;
+                    height: 5px;
                     background-color: $color1;
                     width: 100%;
+                    z-index: 1;
+                    mix-blend-mode: luminosity;
                 }
 
                 span:nth-child(2) {
-
                     right: 0;
-                    height: 110%;
-                    opacity: .7;
-                    background-color: $color1;
+                    height: 100%;
+                    background-color: $color2;
+                    border-top-right-radius: .6rem;
+                    border-bottom-right-radius: .6rem;
                     width: 55%;
                 }
 
-                span:nth-child(3) {}
+                span:nth-child(3) {
+                    width: 45%;
+                    height: 100%;
+                    z-index: -1;
+                    //border: 1px solid greenyellow;
+
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        right: 0;
+                        width: 120%;
+                        height: 50%;
+                        background-color: #fff;
+                        transform: rotate(-7deg);
+                        transform-origin: top right;
+                    }
+
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        right: 0;
+                        bottom: 0;
+                        width: 120%;
+                        height: 50%;
+                        background-color: #fff;
+                        transform: rotate(7deg);
+                        transform-origin: bottom right;
+                    }
+                }
             }
         }
     }
@@ -90,10 +116,10 @@ $color3: rgb(224, 223, 223);
 
 @keyframes swing {
     0% {
-        transform: rotate(27deg);
+        transform: rotate(28.5deg);
     }
 
     100% {
-        transform: rotate(26deg);
+        transform: rotate(27.5deg);
     }
 }
