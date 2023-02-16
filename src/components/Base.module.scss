@@ -1,10 +1,12 @@
 .base {
-    position: relative;
+    position: absolute;
+    top: 50%;
+    left: 50%;
     height: 500px;
     width: 700px;
     border-radius: 1.5rem;
     background-color: #C4222F;
-    box-shadow: 0 1rem .1rem #770E1A;
+    box-shadow: 0 1rem .1rem darken(#C4222F, 20);
     caret-color: transparent;
-    //transform: scale(.8);
+    transform: translate(-50%, -50%);
 }

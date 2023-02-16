@@ -5,11 +5,14 @@ import Platter from './Platter';
 
 const Base = () => {
 
-    const [text, setText] = useState('adagio in f minor')
+    const [text, setText] = useState({
+        author: 'J.S.Bach',
+        work: 'BWV 1056'
+    })
 
     return (
         <div className={classes.base}>
-            <Plate text={text} />
+            <Plate author={text.author} work={text.work} />
             <Platter />
         </div>
     );
