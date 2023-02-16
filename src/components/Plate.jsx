@@ -1,16 +1,15 @@
 import classes from './Plate.module.scss';
-//import background from '../assets/img/plate.svg';
 
-/*const styles = {
-    background: `url(${background}) no-repeat center center`
-}*/
+const Plate = ({ text }) => {
 
-const Plate = () => {
+    //const letters = Array.from(text).map((e, i) => <span className={classes.letter} key={i}>{e}</span>);
 
     return (
         <div className={classes.plate}>
-            <div className={classes.label} />
-            {Array.from({length: 10}).map(() =>  <div className={classes.groove}/>)}
+            <div className={classes.label}>
+               
+            </div>
+            {Array.from({ length: 8 }).map((_, i) => <div key={i} className={classes.groove} />)}
         </div>
     );
 }
