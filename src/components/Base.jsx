@@ -3,6 +3,7 @@ import classes from './Base.module.scss';
 import Plate from './Plate';
 import Platter from './Platter';
 import Tonearm from './Tonearm2';
+import Control from './ControlPanel';
 
 const Base = () => {
 
@@ -16,6 +17,7 @@ const Base = () => {
             <Plate author={text.author} work={text.work} />
             <Platter />
             <Tonearm />
+            <Control />
         </div>
     );
 }

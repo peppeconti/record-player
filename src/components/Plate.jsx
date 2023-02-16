@@ -2,8 +2,6 @@ import classes from './Plate.module.scss';
 
 const Plate = ({ author, work }) => {
 
-    //const letters = Array.from(text).map((e, i) => <span className={classes.letter} key={i}>{e}</span>);
-
     return (
         <div className={classes.plate}>
             <div className={classes.label}>
