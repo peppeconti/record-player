@@ -1,0 +1,99 @@
+$color1: #3d3d3d;
+$color2: rgb(184, 184, 184);
+$color3: rgb(224, 223, 223);
+
+.rest {
+    position: absolute;
+    top: 2.5rem;
+    right: 4.5rem;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background-color: $color1;
+    box-shadow: .15rem .05rem .25rem #000;
+    animation: swing ease-in-out 1s infinite alternate;
+    z-index: 1;
+
+    .tonearm {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 70%;
+        width: 32.5%;
+        background-color: $color2;
+        border-radius: .15rem;
+        box-shadow: .25rem 0 0 darken(rgba(184, 184, 184, .6), 30);
+
+        &::after {
+            content: '';
+            position: inherit;
+            left: inherit;
+            top: inherit;
+            transform: inherit;
+            height: 10px;
+            width: 10px;
+            background-color: $color1;
+            border-radius: 50%;
+        }
+
+        .main {
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            height: 280px;
+            width: 10px;
+            transform: translateX(-50%);
+            background-color: $color3;
+            box-shadow: .25rem 0 .1rem darken(rgba(224, 223, 223, .6), 30);
+
+            .headshell {
+                position: absolute;
+                left: 50%;
+                bottom: -15px;
+                height: 20px;
+                width: 70px;
+                background-color: #fff;
+                border-top-right-radius: .5rem;
+                border-bottom-right-radius: .5rem;
+                border-top-left-radius: 2rem;
+                border-bottom-left-radius: 2rem;
+                overflow: hidden;
+                transform: translateX(-50%) rotate(-35deg);
+
+                span {
+                    position: absolute;
+                }
+
+                span:nth-child(1) {
+                    top: 50%;
+                    transform: translateY(-50%);
+                    height: 7px;
+                    background-color: $color1;
+                    width: 100%;
+                }
+
+                span:nth-child(2) {
+
+                    right: 0;
+                    height: 110%;
+                    opacity: .7;
+                    background-color: $color1;
+                    width: 55%;
+                }
+
+                span:nth-child(3) {}
+            }
+        }
+    }
+}
+
+@keyframes swing {
+    0% {
+        transform: rotate(27deg);
+    }
+
+    100% {
+        transform: rotate(26deg);
+    }
+}

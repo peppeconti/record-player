@@ -2,6 +2,7 @@ import { useState } from 'react';
 import classes from './Base.module.scss';
 import Plate from './Plate';
 import Platter from './Platter';
+import Tonearm from './Tonearm2';
 
 const Base = () => {
 
@@ -14,6 +15,7 @@ const Base = () => {
         <div className={classes.base}>
             <Plate author={text.author} work={text.work} />
             <Platter />
+            <Tonearm />
         </div>
     );
 }
