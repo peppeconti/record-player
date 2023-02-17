@@ -33,9 +33,9 @@ const ControlPanel = ({ controls }) => {
     const sequence = async () => {
         await controls.start({ scale: 1.02, transition: { duration: .5, ease: 'easeIn' } })
         //await controls.set( { scale: 1.02 } )
-        await controls.start({ y: -800, rotate: 180, transition: { delay: .25, duration: 2, ease: 'easeIn' } })
+        await controls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } })
         //await controls.set( { y: -800} )
-        await controls.start({ y: 0, rotate: 0, transition: { duration: 2, ease: 'easeOut' } })
+        await controls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } })
         return await controls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } })
       }
 
