@@ -63,12 +63,14 @@ const ControlPanel = ({ controls, setPlate }) => {
         await setPlate(track[1])
         await controls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } })
         return await controls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } })
-      }
+    }
 
     return (
-        <div className={classes.button} onClick={sequence}>
-            <span></span>
-            <span></span>
+        <div className={classes.control}>
+            <div className={classes.button} onClick={sequence}>
+                <span></span>
+                <span></span>
+            </div>
         </div>
 
     );
