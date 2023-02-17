@@ -1,19 +1,11 @@
-import { useEffect } from 'react';
 import { motion as m } from "framer-motion";
 import classes from './Plate.module.scss';
 
 const Plate = ({ author, work, controls }) => {
 
-    /*useEffect(() => {
-        controls.start({
-            rotate: 360, transition: {
-                duration: 2,
-                repeat: Infinity,
-                ease: 'linear'
-
-            }
-        })
-    }, [])*/
+    const styles = {
+        
+    }
 
     return (
         <m.div className={classes.plate} animate={controls}>

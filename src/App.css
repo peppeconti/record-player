@@ -1,12 +1,13 @@
 .App {
   position: relative;
   height: 100vh;
-  transform: scale(.85);
+  width: 100vw;
+  transform: scale(.9);
 }
 
 @media screen and (max-width: 800px) {
   .App {
-    transform: scale(.8);
+    transform: scale(.85);
   }
 }
 
