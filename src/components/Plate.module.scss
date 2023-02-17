@@ -1,4 +1,5 @@
-$color: rgb(41, 60, 165);
+$dark: var(--dark);
+$light: var(--light);
 
 .plate {
     position: absolute;
@@ -29,10 +30,10 @@ $color: rgb(41, 60, 165);
     }
 
     &::before {
-        border-top: 70px solid $color;
-        border-left: 70px solid $color;
-        border-right: 70px solid lighten($color, 20);
-        border-bottom: 70px solid lighten($color, 20);
+        border-top: 70px solid $dark;
+        border-left: 70px solid $dark;
+        border-right: 70px solid $light;
+        border-bottom: 70px solid $light;
         transform: translate(-50%, -50%) rotate(45deg);
         width: 40%;
         height: 40%;
@@ -54,10 +55,10 @@ $color: rgb(41, 60, 165);
     .label {
         width: 37%;
         height: 37%;
-        border-top: 4px solid $color;
-        border-left: 4px solid $color;
-        border-right: 4px solid lighten($color, 20);
-        border-bottom: 4px solid lighten($color, 20);
+        border-top: 4px solid $dark;
+        border-left: 4px solid $dark;
+        border-right: 4px solid $light;
+        border-bottom: 4px solid $light;
         transform: translate(-50%, -50%) rotate(-135deg);
         //background-color: red;
 

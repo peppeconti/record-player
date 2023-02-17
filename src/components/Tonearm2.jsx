@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import classes from './Tonearm2.module.scss';
 
 const Tonearm = () => {
@@ -19,4 +20,4 @@ const Tonearm = () => {
     );
 }
 
-export default Tonearm;
+export default memo(Tonearm);;

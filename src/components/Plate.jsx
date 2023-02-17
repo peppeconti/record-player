@@ -1,14 +1,20 @@
 import { motion as m } from "framer-motion";
+import { memo, useEffect } from 'react';
 import classes from './Plate.module.scss';
 
-const Plate = ({ author, work, controls }) => {
+const Plate = ({ author, work, controls, dark, light }) => {
+
+    useEffect(() => {
+        console.log('render plate')
+    })
 
     const styles = {
-        
+        '--dark': dark,
+        '--light': light
     }
 
     return (
-        <m.div className={classes.plate} animate={controls}>
+        <m.div className={classes.plate} animate={controls} style={styles}>
             <div className={classes.label}>
                 <p className={classes.text} data-author={author} data-work={work} />
             </div>
@@ -17,4 +23,4 @@ const Plate = ({ author, work, controls }) => {
     );
 }
 
-export default Plate;
+export default memo(Plate);

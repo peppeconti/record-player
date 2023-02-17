@@ -1,4 +1,5 @@
 import classes from './Platter.module.scss';
+import { memo } from 'react';
 
 const Platter = () => {
 
@@ -7,4 +8,4 @@ const Platter = () => {
     );
 }
 
-export default Platter;
+export default memo(Platter);

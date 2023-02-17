@@ -1,7 +1,32 @@
 import classes from './ControlPanel.module.scss';
-import { useState } from 'react';
+import { useState, useEffect, memo } from 'react';
 
-const ControlPanel = ({ controls }) => {
+const track = [
+    {
+        author: 'J.S.Bach',
+        work: 'BWV 1056',
+        color1: '#293ca5',
+        color2: '#5d70d7'
+    },
+    {
+        author: 'G.Verdi',
+        work: 'La traviata',
+        color1: '#3b5b00',
+        color2: '#79af15'
+    },
+    {
+        author: 'F.Chopin',
+        work: 'Etude',
+        color1: '#3b5b00',
+        color2: '#79af15'
+    }
+];
+
+const ControlPanel = ({ controls, setPlate }) => {
+
+    useEffect(() => {
+        console.log('render')
+    })
 
     const [on, setOn] = useState(false)
 
@@ -35,6 +60,7 @@ const ControlPanel = ({ controls }) => {
         //await controls.set( { scale: 1.02 } )
         await controls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } })
         //await controls.set( { y: -800} )
+        await setPlate(track[1])
         await controls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } })
         return await controls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } })
       }
@@ -48,4 +74,4 @@ const ControlPanel = ({ controls }) => {
     );
 }
 
-export default ControlPanel;
+export default memo(ControlPanel);
