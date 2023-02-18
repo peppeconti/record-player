@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import classes from './Base.module.scss';
 import Plate from './Plate';
 import Platter from './Platter';
@@ -10,7 +10,7 @@ const Base = () => {
 
     const controls = useAnimationControls();
 
-    const [plate, setPlate] = useState(undefined)
+    const [plate, setPlate] = useState(undefined);
 
     return (
         <div className={classes.base}>

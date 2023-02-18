@@ -20,17 +20,39 @@ $color: #4d4d4d;
     .tracks {
         height: 100%;
         flex: 1;
-        border: 1px solid #fff;
+        //border: 1px solid #fff;
         display: flex;
         justify-content: space-around;
         align-items: flex-end;
         color: #fff;
+        position: relative;
 
-        span {
+        .pin {
+            position: absolute;
+            height: 15px;
+            width: 33.3%;
+            top: 0;
+            left: 0;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                width: 10px;
+                height: 10px;
+                background-color: #d4e639;
+            }
+        }
+
+        .plate {
             flex: 1;
             font-size: 1.2rem;
             text-align: center;
             cursor: pointer;
+            //background-color: rgb(41, 41, 20);
 
             &:hover {
                 opacity: .9;

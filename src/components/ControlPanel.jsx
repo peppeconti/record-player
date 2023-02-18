@@ -1,6 +1,7 @@
 import classes from './ControlPanel.module.scss';
-import { useState, useEffect, memo } from 'react';
+import { useEffect, memo } from 'react';
 import tracks from '../utils/tracks.js';
+import { motion as m, useAnimationControls } from 'framer-motion';
 
 const ControlPanel = ({ controls, plate, setPlate }) => {
 
@@ -11,10 +12,13 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
 
     }, [setPlate]);
 
-    const [on, setOn] = useState(false)
+    const pinControls = useAnimationControls();
+
+    //const [on, setOn] = useState(false)
 
     const sequence = async (e) => {
         if (tracks.indexOf(plate) !== e) {
+            pinControls.start({ left: `${33.3 * e}%`, transition: { duration: .5, type: 'spring', damping: 12} });
             await controls.start({ scale: 1.02, transition: { duration: .5, ease: 'easeIn' } });
             await controls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } });
             await setPlate(tracks[e]);
@@ -29,7 +33,8 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
 
             </div>
             <div className={classes.tracks}>
-                {tracks.map((e, i) => <span key={i} onClick={() => sequence(i)}>
+                <m.span className={classes.pin} animate={pinControls} />
+                {tracks.map((e, i) => <span key={i} className={classes.plate} onClick={() => sequence(i)}>
                     {(i + 1) + '. ' + e.author}
                 </span>)}
             </div>
