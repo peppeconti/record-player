@@ -44,7 +44,7 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
                 </div>
                 <div className={classes.plates}>
                     {tracks.map((e, i) => <span key={i} className={classes.plate} onClick={!clicked ? () => sequence(i) : null}>
-                        <span className={classes.num}>{(i + 1)}</span>{e.author}
+                        <span className={classes.num}>{(i + 1)}</span>{e.author.split('.')[e.author.split('.').length-1]}
                     </span>)}
                 </div>
             </div>

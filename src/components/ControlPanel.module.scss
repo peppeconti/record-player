@@ -6,9 +6,9 @@ $color: #474747;
     align-items: center;
     gap: 2rem;
     justify-content: space-between;
-    height: 45px;
+    height: 55px;
     width: calc(100% - 3rem);
-    bottom: 1.5rem;
+    bottom: 1.25rem;
     right: 1.5rem;
     //border: 1px solid #fff;
 
@@ -103,7 +103,7 @@ $color: #474747;
                 justify-content: center;
                 align-items: center;
                 height: 100%;
-                font-size: .8rem;
+                font-size: .9rem;
                 cursor: pointer;
                 //background-color: rgb(41, 41, 20);
 
@@ -130,10 +130,10 @@ $color: #474747;
 
     .button {
         display: flex;
-        height: 65%;
-        width: 65px;
+        height: 55%;
+        width: 55px;
         border-radius: 15px;
-        border: 2px solid #2d2d2d;
+        border: 3px solid #3d3d3d;
         cursor: pointer;
 
         &:hover {

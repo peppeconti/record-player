@@ -8,8 +8,8 @@ const tracks = [
     {
         author: 'G.Verdi',
         work: 'La traviata',
-        color1: '#108908',
-        color2: '#12c605'
+        color1: '#28bc18',
+        color2: '#6ec964'
     },
     {
         author: 'F.Chopin',
