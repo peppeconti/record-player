@@ -10,19 +10,14 @@ const Base = () => {
 
     const controls = useAnimationControls();
 
-    const [plate, setPlate] = useState( {
-        author: 'J. S. Bach',
-        work: 'BWV 1056',
-        color1: '#293ca5',
-        color2: '#5d70d7'
-    })
+    const [plate, setPlate] = useState(undefined)
 
     return (
         <div className={classes.base}>
-            <Plate author={plate.author} work={plate.work} dark={plate.color1} light={plate.color2} controls={controls} />
+            {plate && <Plate author={plate.author} work={plate.work} dark={plate.color1} light={plate.color2} controls={controls} />}
             <Platter />
             <Tonearm />
-            <Control controls={controls} setPlate={setPlate} />
+            <Control controls={controls} plate={plate} setPlate={setPlate} />
         </div>
     );
 }

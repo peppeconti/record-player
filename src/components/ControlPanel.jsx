@@ -1,41 +1,26 @@
 import classes from './ControlPanel.module.scss';
 import { useState, useEffect, memo } from 'react';
+import tracks from '../utils/tracks.js';
 
-const tracks = [
-    {
-        author: 'J.S.Bach',
-        work: 'BWV 1056',
-        color1: '#293ca5',
-        color2: '#5d70d7'
-    },
-    {
-        author: 'G.Verdi',
-        work: 'La traviata',
-        color1: '#3b5b00',
-        color2: '#79af15'
-    },
-    {
-        author: 'F.Chopin',
-        work: 'Etude',
-        color1: '#3b5b00',
-        color2: '#79af15'
-    }
-];
-
-const ControlPanel = ({ controls, setPlate }) => {
+const ControlPanel = ({ controls, plate, setPlate }) => {
 
     useEffect(() => {
-        console.log('render')
-    })
+
+        setPlate(tracks[0]);
+        console.log('render control');
+
+    }, [setPlate]);
 
     const [on, setOn] = useState(false)
 
-    const sequence = async () => {
-        await controls.start({ scale: 1.02, transition: { duration: .5, ease: 'easeIn' } });
-        await controls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } });
-        await setPlate(tracks[1]);
-        await controls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } });
-        return await controls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
+    const sequence = async (e) => {
+        if (tracks.indexOf(plate) !== e) {
+            await controls.start({ scale: 1.02, transition: { duration: .5, ease: 'easeIn' } });
+            await controls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } });
+            await setPlate(tracks[e]);
+            await controls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } });
+            return await controls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
+        } else return;
     }
 
     return (
@@ -44,7 +29,9 @@ const ControlPanel = ({ controls, setPlate }) => {
 
             </div>
             <div className={classes.tracks}>
-
+                {tracks.map((e, i) => <span key={i} onClick={() => sequence(i)}>
+                    {(i + 1) + '. ' + e.author}
+                </span>)}
             </div>
             <div className={classes.button}>
                 <span></span>

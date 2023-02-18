@@ -21,6 +21,21 @@ $color: #4d4d4d;
         height: 100%;
         flex: 1;
         border: 1px solid #fff;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        color: #fff;
+
+        span {
+            flex: 1;
+            font-size: 1.2rem;
+            text-align: center;
+            cursor: pointer;
+
+            &:hover {
+                opacity: .9;
+            }
+        }
     }
 
 
