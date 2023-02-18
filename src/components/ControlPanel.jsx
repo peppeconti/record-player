@@ -1,5 +1,5 @@
 import classes from './ControlPanel.module.scss';
-import { useEffect, memo } from 'react';
+import { useEffect, useState, memo } from 'react';
 import tracks from '../utils/tracks.js';
 import { motion as m, useAnimationControls } from 'framer-motion';
 
@@ -12,18 +12,21 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
 
     }, [setPlate]);
 
+    const [clicked, setClicked] = useState(false);
     const pinControls = useAnimationControls();
 
     //const [on, setOn] = useState(false)
 
-    const sequence = async (e) => {
-        if (tracks.indexOf(plate) !== e) {
-            pinControls.start({ left: `${33.3 * e}%`, transition: { duration: .5, type: 'spring', damping: 12} });
+    const sequence = async (e, i) => {
+        if (tracks.indexOf(plate) !== i) {
+            setClicked(true);
+            pinControls.start({ left: `${100/tracks.length*i}%`, transition: { duration: .5, type: 'spring', damping: 15} });
             await controls.start({ scale: 1.02, transition: { duration: .5, ease: 'easeIn' } });
             await controls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } });
-            await setPlate(tracks[e]);
+            await setPlate(tracks[i]);
             await controls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } });
-            return await controls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
+            await controls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
+            return setClicked(false);
         } else return;
     }
 
@@ -34,7 +37,7 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
             </div>
             <div className={classes.tracks}>
                 <m.span className={classes.pin} animate={pinControls} />
-                {tracks.map((e, i) => <span key={i} className={classes.plate} onClick={() => sequence(i)}>
+                {tracks.map((e, i) => <span key={i} className={classes.plate} onClick={!clicked ? (e) => sequence(e, i) : null}>
                     {(i + 1) + '. ' + e.author}
                 </span>)}
             </div>
