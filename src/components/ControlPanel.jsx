@@ -29,6 +29,8 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
         } else return;
     }
 
+    const button_styles = !on ? [classes.button, classes.off].join(' ') : [classes.button, classes.on].join(' ')
+
     return (
         <div className={classes.control}>
             <div className={classes.led}>
@@ -44,7 +46,7 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
                     </span>)}
                 </div>
             </div>
-            <div className={classes.button}>
+            <div className={button_styles} onClick={() => setOn(prev => !prev)}>
                 <span></span>
                 <span></span>
             </div>

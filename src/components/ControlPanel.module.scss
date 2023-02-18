@@ -101,25 +101,56 @@ $color: #4d4d4d;
             }
         }
     }
+
     .button {
         display: flex;
         height: 100%;
         width: 80px;
-        background-color: lighten($color, 25);
         cursor: pointer;
 
         &:hover {
-            filter: brightness(1.3);
+            filter: brightness(1.1);
         }
+
+        ;
+
 
         span:nth-child(1) {
             height: 100%;
+            width: 50%;
+        }
+
+        span:nth-child(2) {
+            height: 100%;
+            width: 45%;
+        }
+
+    }
+
+    .off {
+        background-color: lighten($color, 25);
+
+        span:nth-child(1) {
             width: 50%;
             background-color: $color;
         }
 
         span:nth-child(2) {
-            height: 100%;
+            width: 45%;
+            background-color: lighten($color, 15);
+        }
+    }
+
+    .on {
+        background-color: lighten($color, 25);
+        justify-content: flex-end;
+
+        span:nth-child(2) {
+            width: 50%;
+            background-color: $color;
+        }
+
+        span:nth-child(1) {
             width: 45%;
             background-color: lighten($color, 15);
         }
