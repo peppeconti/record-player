@@ -1,3 +1,5 @@
+$color: #973aa3;
+
 .base {
     position: absolute;
     top: 50%;
@@ -5,8 +7,8 @@
     height: 550px;
     width: 700px;
     border-radius: 1.5rem;
-    background-color: #C4222F;
-    box-shadow: 0 1rem .1rem darken(#C4222F, 20);
+    background-color: $color;
+    box-shadow: 0 1rem .1rem darken($color, 20);
     caret-color: transparent;
     transform: translate(-50%, -50%);
 }
