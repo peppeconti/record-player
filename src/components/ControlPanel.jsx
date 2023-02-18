@@ -29,12 +29,14 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
         } else return;
     }
 
-    const button_styles = !on ? [classes.button, classes.off].join(' ') : [classes.button, classes.on].join(' ')
+    const button_styles = !on ? [classes.button, classes.off].join(' ') : [classes.button, classes.on].join(' ');
+    const led_styles = !on ? classes.off : classes.on;
 
     return (
         <div className={classes.control}>
             <div className={classes.led}>
-
+                <span className={led_styles}/>
+                <span>{on ? 'ON' : 'OFF'}</span>
             </div>
             <div className={classes.tracks}>
                 <div className={classes.switch_groove}>
