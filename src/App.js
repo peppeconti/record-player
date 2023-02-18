@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Base from './components/Base';
 
 function App() {
