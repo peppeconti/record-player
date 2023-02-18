@@ -58,33 +58,3 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
 }
 
 export default memo(ControlPanel);
-
-
-
-
-
-
-/*const start = () => {
-
-    if (!on) {
-        controls.start({
-            rotate: 360*10, transition: {
-                duration: 20,
-                ease: 'easeInOut'
- 
-            }
-        });
-        setOn(prev => !prev);
-    } else {
-        controls.stop();
-        controls.start({
-            rotate: -0,  transition: {
-                duration: 1,
-                ease: 'easeOut'
- 
-            }
-        })
-        setOn(prev => !prev);
-    }
-    
-}*/
