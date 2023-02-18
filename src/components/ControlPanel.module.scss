@@ -48,12 +48,13 @@ $color: #474747;
         flex: 1;
         //border: 1px solid #fff;
         display: flex;
+        justify-content: space-between;
         flex-direction: column;
         color: #fff;
         position: relative;
 
         .switch_groove {
-            height: 50%;
+            height: 45%;
             position: relative;
             display: flex;
             align-items: center;
