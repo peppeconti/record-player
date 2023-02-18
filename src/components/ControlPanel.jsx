@@ -14,13 +14,12 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
 
     const [clicked, setClicked] = useState(false);
     const pinControls = useAnimationControls();
+    const [on, setOn] = useState(false);
 
-    //const [on, setOn] = useState(false)
-
-    const sequence = async (e, i) => {
-        if (tracks.indexOf(plate) !== i) {
+    const sequence = async i => {
+        if (tracks.indexOf(plate) !== i && !on) {
             setClicked(true);
-            pinControls.start({ left: `${100/tracks.length*i}%`, transition: { duration: .5, type: 'spring', damping: 15} });
+            pinControls.start({ left: `${100 / tracks.length * i}%`, transition: { duration: .5, type: 'spring', damping: 15 } });
             await controls.start({ scale: 1.02, transition: { duration: .5, ease: 'easeIn' } });
             await controls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } });
             await setPlate(tracks[i]);
@@ -36,10 +35,14 @@ const ControlPanel = ({ controls, plate, setPlate }) => {
 
             </div>
             <div className={classes.tracks}>
-                <m.span className={classes.pin} animate={pinControls} />
-                {tracks.map((e, i) => <span key={i} className={classes.plate} onClick={!clicked ? (e) => sequence(e, i) : null}>
-                    {(i + 1) + '. ' + e.author}
-                </span>)}
+                <div className={classes.switch_groove}>
+                    <m.div className={classes.switch} animate={pinControls} />
+                </div>
+                <div className={classes.plates}>
+                    {tracks.map((e, i) => <span key={i} className={classes.plate} onClick={!clicked ? () => sequence(i) : null}>
+                        {(i + 1) + '. ' + e.author}
+                    </span>)}
+                </div>
             </div>
             <div className={classes.button}>
                 <span></span>

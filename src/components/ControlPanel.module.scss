@@ -22,40 +22,67 @@ $color: #4d4d4d;
         flex: 1;
         //border: 1px solid #fff;
         display: flex;
-        justify-content: space-around;
-        align-items: flex-end;
+        flex-direction: column;
         color: #fff;
         position: relative;
 
-        .pin {
-            position: absolute;
-            height: 15px;
-            width: 33.3%;
-            top: 0;
-            left: 0;
+        .switch_groove {
+            height: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
 
             &::after {
                 content: '';
                 position: absolute;
-                top: 50%;
+                border-radius: 10px;
                 left: 50%;
-                transform: translate(-50%, -50%);
-                border-radius: 50%;
-                width: 10px;
-                height: 10px;
-                background-color: #d4e639;
+                transform: translateX(-50%);
+                width: 88%;
+                height: 40%;
+                background-color: #2d2d2d;
+                box-shadow: inset -.08rem -.06rem 0 #4d4d4d;
             }
+
+            .switch {
+                height: 100%;
+                width: 33.3%;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    border-radius: 4px;
+                    width: 10px;
+                    height: 17px;
+                    background-color: lightgray;
+                    box-shadow: .1rem 0 0 #4d4d4d;
+                }
+            }
+
         }
 
-        .plate {
-            flex: 1;
-            font-size: 1.2rem;
-            text-align: center;
-            cursor: pointer;
-            //background-color: rgb(41, 41, 20);
+        .plates {
+            height: 50%;
+            display: flex;
 
-            &:hover {
-                opacity: .9;
+            .plate {
+                flex: 1;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                height: 100%;
+                font-size: 1rem;
+                cursor: pointer;
+                //background-color: rgb(41, 41, 20);
+
+                &:hover {
+                    opacity: .9;
+                }
             }
         }
     }
