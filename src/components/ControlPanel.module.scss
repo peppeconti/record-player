@@ -75,19 +75,32 @@ $color: #4d4d4d;
                 display: flex;
                 align-items: flex-end;
                 justify-content: center;
+                align-items: center;
                 height: 100%;
-                font-size: 1rem;
+                font-size: .8rem;
                 cursor: pointer;
                 //background-color: rgb(41, 41, 20);
 
                 &:hover {
                     opacity: .9;
                 }
+
+                .num {
+                    background-color: #2d2d2d;
+                    box-shadow: .05rem .05rem 0 #4d4d4d;
+                    margin-right: 1rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 20px;
+                    width: 20px;
+                    border-radius: 50%;
+                    padding: .3rem;
+                    font-size: .9rem;
+                }
             }
         }
     }
-
-
     .button {
         display: flex;
         height: 100%;
