@@ -1,17 +1,17 @@
-import { motion as m } from "framer-motion";
 import { memo, useEffect } from 'react';
 import classes from './Plate.module.scss';
+import { motion as m } from "framer-motion";
 
 const Plate = ({ author, work, controls, dark, light }) => {
 
     useEffect(() => {
-        console.log('render plate')
-    })
+        console.log('render plate');
+    });
 
     const styles = {
         '--dark': dark,
         '--light': light
-    }
+    };
 
     return (
         <m.div className={classes.plate} animate={controls} style={styles}>
