@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useReducer } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
 
