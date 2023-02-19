@@ -7,8 +7,6 @@ import usePlate from '../hooks/usePlate';
 
 const Base = () => {
 
-    const audioRef = useRef(null);
-
     const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange } = usePlate();
 
     return (
