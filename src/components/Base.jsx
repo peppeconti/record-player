@@ -16,7 +16,7 @@ const Base = () => {
                 {state.plate && <Plate author={state.plate.author} work={state.plate.work} dark={state.plate.color1} light={state.plate.color2} controls={plateControls} />}
                 <Platter />
                 <Tonearm />
-                <Control tracks={tracks} controls={switchPlateControls} on={state.play} play={play} animateChange={animateChange} />
+                <Control tracks={tracks} controls={switchPlateControls} on={state.playerIsOn} play={play} animateChange={animateChange} />
             </div>
         </>
     );
