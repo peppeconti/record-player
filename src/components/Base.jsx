@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import classes from './Base.module.scss';
 import Plate from './Plate';
 import Platter from './Platter';
@@ -14,7 +13,6 @@ const Base = () => {
 
     return (
         <>
-            <audio ref={audioRef} src={state.plate.audio}/>
             <div className={classes.base}>
                 {state.plate && <Plate author={state.plate.author} work={state.plate.work} dark={state.plate.color1} light={state.plate.color2} controls={plateControls} />}
                 <Platter />
