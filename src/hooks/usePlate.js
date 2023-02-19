@@ -51,7 +51,7 @@ const usePlate = (audio) => {
                 await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
-                audio.current.start();
+                audio.current.play();
             } else {
                 plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
