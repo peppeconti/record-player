@@ -12,19 +12,6 @@ function reducer(state, action) {
     switch (action.type) {
         case 'changePlate':
             return { ...state, plate: tracks[action.plateIndex] };
-        case 'animateChange':
-            async () => {
-                if (tracks.indexOf(state.plate) !== action.plateIndex && !state.playerIsOn) {
-                    //setClicked(true);
-                    switchPlateControls.start({ left: `${100 / tracks.length * action.plateIndex}%`, transition: { duration: .5, type: 'spring', damping: 15 } });
-                    await plateControls.start({ scale: 1.02, transition: { duration: .5, ease: 'easeIn' } });
-                    await plateControls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } });
-                    await dispatch({type: 'changePlate', plateIndex: action.plateIndex});
-                    await plateControls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } });
-                    await plateControls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
-                    //return setClicked(false);
-                } else return;
-            }
         case 'play':
             return { ...state, playerIsOn: !state.playerIsOn };
         default:
@@ -40,7 +27,24 @@ const usePlate = () => {
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
 
-    return { tracks, state, dispatch, plateControls, switchPlateControls, tonearmControls };
+        const animateChange = async i => {
+            if (tracks.indexOf(state.plate) !== i && !state.playerIsOn) {
+                //setClicked(true);
+                switchPlateControls.start({ left: `${100 / tracks.length * i}%`, transition: { duration: .5, type: 'spring', damping: 15 } });
+                await plateControls.start({ scale: 1.02, transition: { duration: .5, ease: 'easeIn' } });
+                await plateControls.start({ y: -1000, rotate: 360, transition: { delay: .25, duration: 2, ease: 'easeIn' } });
+                dispatch({type: 'changePlate', plateIndex: i});
+                await plateControls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } });
+                await plateControls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
+                //return setClicked(false);
+            } else return;
+        };
+
+        const play = () => {
+                dispatch({type: 'play'});
+        }
+
+    return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls };
 }
 
 export default usePlate;

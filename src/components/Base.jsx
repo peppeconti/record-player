@@ -1,25 +1,22 @@
-import { useState } from 'react';
 import classes from './Base.module.scss';
 import Plate from './Plate';
 import Platter from './Platter';
 import Tonearm from './Tonearm2';
 import Control from './ControlPanel';
-import { useAnimationControls } from 'framer-motion';
+import usePlate from '../hooks/usePlate';
 
 const Base = () => {
 
-    const controls = useAnimationControls();
-
-    const [plate, setPlate] = useState(undefined);
+    const { tracks, state, plateControls, switchPlateControls, play, animateChange } = usePlate();
 
     return (
         <>
             <audio src=''/>
             <div className={classes.base}>
-                {plate && <Plate author={plate.author} work={plate.work} dark={plate.color1} light={plate.color2} controls={controls} />}
+                {state.plate && <Plate author={state.plate.author} work={state.plate.work} dark={state.plate.color1} light={state.plate.color2} controls={plateControls} />}
                 <Platter />
                 <Tonearm />
-                <Control controls={controls} plate={plate} setPlate={setPlate} />
+                <Control tracks={tracks} controls={switchPlateControls} on={state.play} play={play} animateChange={animateChange} />
             </div>
         </>
     );
