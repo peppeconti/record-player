@@ -15,7 +15,7 @@ function reducer(state, action) {
         case 'animationIsOn':
             return { ...state, animationIsOn: !state.animationIsOn };
         case 'play':
-            return { ...state, playerIsOn: !state.playerIsOn };
+            return { ...state, playerIsOn: action.payload };
         default:
             return state;
     }
@@ -46,12 +46,12 @@ const usePlate = (audio) => {
         if (!state.animationIsOn) {
 
             if (!state.playerIsOn) {
-                dispatch({ type: 'play' });
+                dispatch({ type: 'play', payload: true });
                 await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9, onComplete: () => audio.current.play()} });
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 return plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
             } else {
-                dispatch({ type: 'play' });
+                dispatch({ type: 'play', payload: false });
                 plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
                 audio.current.pause();
