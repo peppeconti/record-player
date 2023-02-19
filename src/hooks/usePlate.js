@@ -45,13 +45,16 @@ const usePlate = (audio) => {
     const play = async () => {
         if (!state.animationIsOn) {
 
-            dispatch({ type: 'play' });
-
             if (!state.playerIsOn) {
-                
+                dispatch({ type: 'play' });
+                await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
+                tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
+                plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
                 audio.current.play();
             } else {
-               
+                dispatch({ type: 'play' });
+                plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
+                tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
                 audio.current.pause();
                 audio.current.currentTime = 0;
             };
