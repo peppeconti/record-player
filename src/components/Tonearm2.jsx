@@ -1,11 +1,12 @@
 import { memo } from 'react';
 import classes from './Tonearm2.module.scss';
+import { motion as m } from 'framer-motion'
 
-const Tonearm = () => {
+const Tonearm = ({ controls }) => {
 
     return (
         <>
-            <div className={classes.rest}>
+            <m.div className={classes.rest} animate={controls}>
                 <div className={classes.tonearm}>
                     <div className={classes.main}>
                         <div className={classes.headshell}>
@@ -15,7 +16,7 @@ const Tonearm = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </m.div>
         </>
     );
 }

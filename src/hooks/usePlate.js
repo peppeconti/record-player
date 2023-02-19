@@ -21,7 +21,7 @@ function reducer(state, action) {
     }
 }
 
-const usePlate = () => {
+const usePlate = (audio) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -43,7 +43,17 @@ const usePlate = () => {
     };
 
     const play = () => {
-        if (!state.plateIsChanging) dispatch({ type: 'play' });
+        if (!state.plateIsChanging) {
+
+            if (!state.playerIsOn) {
+                audio.current.play();
+            } else {
+                audio.current.pause();
+                audio.current.currentTime = 0;
+            };
+
+            dispatch({ type: 'play' });
+        };
     }
 
     return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls };
