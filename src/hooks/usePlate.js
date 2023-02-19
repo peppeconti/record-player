@@ -42,10 +42,12 @@ const usePlate = () => {
         } else return;
     };
 
+    const pl = () => state.plate.audio.play();
+
     const anim = async () => {
         await tonearmControls.start({ rotate: 29, transition: { 
             duration: 1.5, type: 'spring', damping: 9, onComplete: () => {
-                return state.plate.audio.play();
+                return pl();
             }
          }});
         tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
