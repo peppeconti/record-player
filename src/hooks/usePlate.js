@@ -1,9 +1,10 @@
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
 
 const initialState = {
     plate: tracks[0],
+    audio: new Audio(tracks[0].audio),
     animationIsRunning: false,
     playerIsOn: false
 };
@@ -11,7 +12,7 @@ const initialState = {
 function reducer(state, action) {
     switch (action.type) {
         case 'changePlate':
-            return { ...state, plate: tracks[action.plateIndex] };
+            return { ...state, plate: tracks[action.plateIndex], audio: new Audio(tracks[action.plateIndex].audio)};
         case 'animationIsRunning':
             return { ...state, animationIsRunning: !state.animationIsRunning };
         case 'play':
@@ -21,7 +22,7 @@ function reducer(state, action) {
     }
 }
 
-const usePlate = (audio) => {
+const usePlate = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
@@ -48,7 +49,7 @@ const usePlate = (audio) => {
             if (!state.playerIsOn) {
 
                 dispatch({ type: 'play', payload: true });
-                await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9, onComplete: () => audio.play()} });
+                await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9, onComplete: () => state.audio.play() } });
                 //tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 //return plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
             } else {
@@ -56,8 +57,8 @@ const usePlate = (audio) => {
                 dispatch({ type: 'play', payload: false });
                 //plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
-                audio.pause();
-                return audio.currentTime = 0;
+                state.audio.pause();
+                return state.audio.currentTime = 0;
             };
         };
     }

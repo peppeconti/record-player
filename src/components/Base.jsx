@@ -10,7 +10,7 @@ const Base = () => {
 
     const audioRef = useRef(null);
 
-    const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange } = usePlate(audioRef.current);
+    const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange } = usePlate();
 
     return (
         <>
