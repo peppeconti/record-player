@@ -42,22 +42,26 @@ const usePlate = () => {
         } else return;
     };
 
-    const anim = () => {
-        tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 }});
+    const anim = async () => {
+        await tonearmControls.start({ rotate: 29, transition: { 
+            duration: 1.5, type: 'spring', damping: 9, onComplete: () => {
+                return state.plate.audio.play();
+            }
+         }});
         tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
         plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
         return;
     }
 
-    const play = () => {
+    const play = async () => {
         if (!state.animationIsRunning) {
 
             if (!state.playerIsOn) {
 
                 dispatch({ type: 'play', payload: true });
-                anim();
+                await anim();
                 //tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 }});
-                state.plate.audio.play();
+                //state.plate.audio.play();
                 //tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 //return plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
 
