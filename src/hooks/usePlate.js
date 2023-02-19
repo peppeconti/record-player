@@ -48,13 +48,19 @@ const usePlate = (audio) => {
             dispatch({ type: 'play' });
 
             if (!state.playerIsOn) {
-                await tonearmControls.start({rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 }});
-                plateControls.start({ rotate: 360, transition: {duration: 2, delay: .0, repeat: Infinity, ease: 'linear' }});
-                tonearmControls.start({rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .0,  repeat: Infinity, ease: 'linear' }})
-                audio.current.play();
+                await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
+                tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .5, repeat: Infinity, ease: 'linear' } })
+                await plateControls.start({
+                    rotate: 360, transition: {
+                        duration: 2, delay: .3, ease: 'linear', onComplete: () => {
+                            audio.current.play();
+                        }
+                    }
+                });
+                plateControls.start({rotate: 360*2, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
             } else {
-                plateControls.start({ rotate: 0, transition: {duration: 150, type: 'spring', damping: 15  }})
-                tonearmControls.start({rotate: 0, transition: { duration: .5, ease: 'easeIn' }});
+                plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
+                tonearmControls.start({ rotate: 0, transition: { duration: .5, ease: 'easeOut' } });
                 audio.current.pause();
                 audio.current.currentTime = 0;
             };
