@@ -11,7 +11,7 @@ const initialState = {
 function reducer(state, action) {
     switch (action.type) {
         case 'changePlate':
-            return { ...state, plate: tracks[action.plateIndex]};
+            return { ...state, plate: tracks[action.plateIndex] };
         case 'animationIsRunning':
             return { ...state, animationIsRunning: !state.animationIsRunning };
         case 'play':
@@ -43,29 +43,26 @@ const usePlate = () => {
     };
 
     const anim = async () => {
-        await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 }});
+        await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
         tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
-        plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
+        plateControls.start({ rotate: 360, transition: { duration: 2, repeat: Infinity, ease: 'linear' } });
         return;
     }
 
     const play = () => {
         if (!state.animationIsRunning) {
 
-            let start;
+            //let start;
 
             if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
-                start = setTimeout(() => {
-                    state.plate.audio.load();
-                    state.plate.audio.play();
-                    return;
-                }, 1500);
+                state.plate.audio.load();
+                state.plate.audio.play();
                 anim();
 
             } else if (state.playerIsOn) {
 
-                clearTimeout(start);
+                //clearTimeout(start);
                 dispatch({ type: 'play', payload: false });
                 plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
