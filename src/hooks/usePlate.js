@@ -55,17 +55,14 @@ const usePlate = () => {
         return;
     }
 
-    const play = async () => {
+    const play = () => {
         if (!state.animationIsRunning) {
 
             if (!state.playerIsOn) {
 
                 dispatch({ type: 'play', payload: true });
-                await anim();
-                //tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 }});
-                //state.plate.audio.play();
-                //tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
-                //return plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
+                return state.plate.audio.play()
+                //await anim();
 
             } else if (state.playerIsOn) {
 
