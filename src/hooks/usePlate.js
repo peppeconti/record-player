@@ -38,14 +38,13 @@ const usePlate = () => {
             dispatch({ type: 'changePlate', plateIndex: i });
             await plateControls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } });
             await plateControls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
+            await state.plate.audio.load();
             return dispatch({ type: 'animationIsRunning' });
-        } else return;
+        } else return console.log('stop first');
     };
 
     const play = async () => {
         if (!state.animationIsRunning) {
-
-            state.plate.audio.load();
 
             if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
@@ -62,10 +61,12 @@ const usePlate = () => {
                 plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
                 state.plate.audio.pause();
-                return state.audio.currentTime = 0;
+                return state.plate.audio.currentTime = 0;
 
             };
-        };
+        } else {
+            return console.log('hooooooo');
+        }
     }
 
     return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls };
