@@ -4,6 +4,7 @@ import { useAnimationControls } from 'framer-motion';
 
 const initialState = {
     plate: tracks[0],
+    audio: new Audio(tracks[0].audio),
     animationIsRunning: false,
     playerIsOn: false
 };
@@ -11,7 +12,7 @@ const initialState = {
 function reducer(state, action) {
     switch (action.type) {
         case 'changePlate':
-            return { ...state, plate: tracks[action.plateIndex] };
+            return { ...state, plate: tracks[action.plateIndex], audio: new Audio(tracks[action.plateIndex].audio) };
         case 'animationIsRunning':
             return { ...state, animationIsRunning: !state.animationIsRunning };
         case 'play':
@@ -58,11 +59,12 @@ const usePlate = () => {
                 state.plate.audio.play();
             }, 1500);*/
 
+            const audio = new Audio(state.plate.audio);
+
             if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
-                const audio = new Audio(state.plate.audio);
                 await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
-                audio.play();
+                state.audio.play();
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 return plateControls.start({ rotate: 360, transition: { duration: 2, repeat: Infinity, ease: 'linear' } });
 
@@ -73,8 +75,8 @@ const usePlate = () => {
                 dispatch({ type: 'play', payload: false });
                 plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
-                //.pause();
-                //return state.plate.audio.currentTime = 0;
+                state.audio.pause();
+                return state.audio.currentTime = 0;
 
             };
         };
