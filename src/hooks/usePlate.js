@@ -39,6 +39,7 @@ const usePlate = () => {
 
     useEffect(() => {
         setAudio(state.audio);
+        console.log(state.audio);
     }, [state.audio, setAudio])
 
     const animateChange = async i => {
@@ -68,6 +69,7 @@ const usePlate = () => {
                 dispatch({ type: 'play', payload: true });
                 await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
                 state.audio.play();
+                console.log(state.audio);
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 return plateControls.start({ rotate: 360, transition: { duration: 2, repeat: Infinity, ease: 'linear' } });
 
