@@ -42,14 +42,8 @@ const usePlate = () => {
         } else return;
     };
 
-    const pl = () => state.plate.audio.play();
-
     const anim = async () => {
-        await tonearmControls.start({ rotate: 29, transition: { 
-            duration: 1.5, type: 'spring', damping: 9, onComplete: () => {
-                return pl();
-            }
-         }});
+        await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 }});
         tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
         plateControls.start({rotate: 360, transition: {duration: 2, repeat: Infinity, ease: 'linear'}});
         return;
@@ -58,17 +52,21 @@ const usePlate = () => {
     const play = () => {
         if (!state.animationIsRunning) {
 
-            if (!state.playerIsOn) {
+            let start;
 
+            if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
-                return state.plate.audio.play()
-                //await anim();
+                start = setTimeout(() => {
+                    return state.plate.audio.play();
+                }, 1500);
+                anim();
 
             } else if (state.playerIsOn) {
 
+                clearTimeout(start);
                 dispatch({ type: 'play', payload: false });
-                //plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
-                //tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
+                plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
+                tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
                 state.plate.audio.pause();
                 return state.plate.audio.currentTime = 0;
 
