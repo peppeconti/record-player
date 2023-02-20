@@ -59,8 +59,6 @@ const usePlate = () => {
                 state.plate.audio.play();
             }, 1500);*/
 
-            const audio = new Audio(state.plate.audio);
-
             if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
                 await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
