@@ -35,7 +35,10 @@ const usePlate = () => {
     // load current audio
 
     useEffect(() => {
-        state.audio.load();
+        async function setAudio(audio) {
+            audio.load();
+        };
+        setAudio(state.audio);
     }, [state.audio])
 
     const animateChange = async i => {
