@@ -50,10 +50,10 @@ const usePlate = () => {
             await plateControls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
             return dispatch({ type: 'animationIsRunning' });
         } else {
-            /*setAlert(true);
+            setAlert(true);
             setTimeout(() => {
                 setAlert(false)
-            }, 3000);*/
+            }, 3000);
             return console.log('stop first')
         };
     };
