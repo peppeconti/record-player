@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
 
@@ -29,7 +29,12 @@ const usePlate = () => {
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
 
-    state.plate.audio.load();
+    useEffect(() => {
+        // load audio
+        state.plate.audio.load();
+        console.log('audio changed');
+
+    }, [state.plate.audio])
 
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
