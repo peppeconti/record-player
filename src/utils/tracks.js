@@ -6,21 +6,21 @@ const tracks = [
     {
         author: 'J.S.Bach',
         work: 'BWV 1056',
-        audio: new Audio(adagio),
+        audio: adagio,
         color1: '#293ca5',
         color2: '#5d70d7'
     },
     {
         author: 'G.Verdi',
         work: 'La traviata',
-        audio: new Audio(traviata),
+        audio: traviata,
         color1: '#28bc18',
         color2: '#6ec964'
     },
     {
         author: 'F.Chopin',
         work: 'Étude',
-        audio: new Audio(etude),
+        audio: etude,
         color1: '#8c189b',
         color2: '#da24f2'
     }
