@@ -29,6 +29,8 @@ const usePlate = () => {
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
 
+    state.plate.audio.load();
+
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
             dispatch({ type: 'animationIsRunning' });
@@ -38,7 +40,6 @@ const usePlate = () => {
             dispatch({ type: 'changePlate', plateIndex: i });
             await plateControls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } });
             await plateControls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
-            await state.plate.audio.load();
             return dispatch({ type: 'animationIsRunning' });
         } else return console.log('stop first');
     };
@@ -65,7 +66,7 @@ const usePlate = () => {
 
             };
         } else {
-            return console.log('hooooooo');
+            return console.log('hoooo wait!');
         }
     }
 
