@@ -46,9 +46,9 @@ const usePlate = () => {
     const play = async () => {
         if (!state.animationIsRunning) {
 
-            /*state.plate.audio.load();
+            state.audio.load();
 
-            const start = setTimeout(() => {
+            /*const start = setTimeout(() => {
                 state.plate.audio.play();
             }, 1500);*/
 
