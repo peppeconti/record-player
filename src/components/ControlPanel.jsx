@@ -2,7 +2,7 @@ import classes from './ControlPanel.module.scss';
 import { memo } from 'react';
 import { motion as m } from 'framer-motion';
 
-const ControlPanel = ({ tracks, controls, on, play, animateChange }) => {
+const ControlPanel = ({ tracks, controls, on, play, animateChange, alert }) => {
 
     const button_styles = !on ? [classes.button, classes.off].join(' ') : [classes.button, classes.on].join(' ');
     const led_styles = !on ? classes.off : classes.on;
@@ -12,6 +12,7 @@ const ControlPanel = ({ tracks, controls, on, play, animateChange }) => {
             <div className={classes.led}>
                 <span className={led_styles}/>
                 <span>{on ? 'ON' : 'OFF'}</span>
+                {alert && <span>Stop first!</span>}
             </div>
             <div className={classes.tracks}>
                 <div className={classes.switch_groove}>

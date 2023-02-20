@@ -20,6 +20,7 @@ $color: #474747;
         width: 70px;
         padding: 0rem;
         //border: 1px solid #fff;
+        position: relative;
 
         span:nth-child(1) {
             height: 25px;
@@ -33,13 +34,30 @@ $color: #474747;
         }
 
         .off {
-            background-color: rgb(252, 71, 71);
+            background-color: #fc4747;
         }
 
         span:nth-child(2) {
             text-align: right;
             flex:1;
             color: #fff;
+        }
+
+        span:nth-child(3) {
+            position: absolute;
+            padding: .5rem;
+            bottom: -70%;
+            width: 100px;
+            left: 50%;
+            border-radius: 1rem;
+            transform: translateX(-50%);
+            background-color: #2d2d2d;
+            color: #fff;
+            font-size: .9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
     }
 
