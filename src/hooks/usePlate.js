@@ -52,17 +52,19 @@ const usePlate = () => {
     const play = () => {
         if (!state.animationIsRunning) {
 
-            //let start;
+            state.plate.audio.load();
+
+            const start = setTimeout(() => {
+                state.plate.audio.play();
+            }, 1500);
 
             if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
-                state.plate.audio.load();
-                state.plate.audio.play();
                 anim();
 
             } else if (state.playerIsOn) {
 
-                //clearTimeout(start);
+                clearTimeout(start);
                 dispatch({ type: 'play', payload: false });
                 plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
