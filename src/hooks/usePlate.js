@@ -57,7 +57,9 @@ const usePlate = () => {
             if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
                 start = setTimeout(() => {
-                    return state.plate.audio.play();
+                    state.plate.audio.load();
+                    state.plate.audio.play();
+                    return;
                 }, 1500);
                 anim();
 
