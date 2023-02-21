@@ -1,4 +1,4 @@
-import { useReducer, useState, useRef } from 'react';
+import { useReducer, useState, useRef, useEffect } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
 import { Howl } from 'howler';
@@ -30,7 +30,11 @@ const usePlate = () => {
 
     const audio = useRef(new Howl({
         src: state.plate.audio
-    }))
+    }));
+
+    useEffect(() => {
+        audio.current.src = state.plate.audio
+    }, [state.plate.audio]);
 
     // animation controls
     const plateControls = useAnimationControls();
