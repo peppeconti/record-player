@@ -29,26 +29,26 @@ const usePlate = () => {
 
     // handle audio loading
     const audio = useRef(new Audio());
-    const ss = useRef(false);
+    /*const ss = useRef(false);
 
     if (!ss.current) {
         audio.current.src = state.plate.audio;
         audio.current.load();
         console.log('loaded');
-    };
+    };*/
 
     // animation controls
     const plateControls = useAnimationControls();
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
 
-    useEffect(() => {
+    /*useEffect(() => {
         ss.current = true;
-    }, []);
+    }, []);*/
 
     useEffect(() => {
         audio.current.src = state.plate.audio;
-        console.log('src set')
+        //console.log('src set')
     }, [state.plate]);
 
     const animateChange = async i => {
@@ -79,6 +79,7 @@ const usePlate = () => {
                 /*if (audioContext.current.state === 'suspended') {
                     audioContext.current.resume();
                 };*/
+                audio.current.load();
                 audio.current.play();
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 return plateControls.start({ rotate: 360, transition: { duration: 2, repeat: Infinity, ease: 'linear' } });
