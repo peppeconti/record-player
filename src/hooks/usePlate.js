@@ -31,10 +31,10 @@ const usePlate = () => {
     const audio = useRef(new Audio());
     const ss = useRef(false);
 
-    if (!ss.current) {
+  
         audio.current.load();
         console.log('loaded')
-    };
+  
 
     // animation controls
     const plateControls = useAnimationControls();
