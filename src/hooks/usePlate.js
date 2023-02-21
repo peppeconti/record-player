@@ -31,10 +31,10 @@ const usePlate = () => {
     const audio = useRef(new Audio());
     const ss = useRef(false);
 
-  
+    if (!ss.current) {
         audio.current.load();
         console.log('loaded')
-  
+    };
 
     // animation controls
     const plateControls = useAnimationControls();
@@ -47,6 +47,7 @@ const usePlate = () => {
 
     useEffect(() => {
         audio.current.src = state.plate.audio;
+        console.log('src set')
     }, [state.plate]);
 
     const animateChange = async i => {
