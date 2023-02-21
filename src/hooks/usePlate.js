@@ -33,7 +33,8 @@ const usePlate = () => {
     }));
 
     useEffect(() => {
-        audio.current.src = state.plate.audio
+        audio.current._src = state.plate.audio;
+        console.log(audio.current._src)
     }, [state.plate.audio]);
 
     // animation controls
