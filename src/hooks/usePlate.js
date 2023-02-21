@@ -1,6 +1,7 @@
-import { useReducer, useState } from 'react';
+import { useReducer, useState, useRef } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
+import { Howl } from 'howler';
 
 const initialState = {
     plate: tracks[0],
@@ -26,6 +27,10 @@ const usePlate = () => {
     // states
     const [state, dispatch] = useReducer(reducer, initialState);
     const [alert, setAlert] = useState(false);
+
+    const audio = useRef(new Howl({
+        src: state.plate.audio
+    }))
 
     // animation controls
     const plateControls = useAnimationControls();
@@ -58,6 +63,7 @@ const usePlate = () => {
 
                 dispatch({ type: 'play', payload: true });
                 await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
+                audio.current.play();
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 return plateControls.start({ rotate: 360, transition: { duration: 2, repeat: Infinity, ease: 'linear' } });
 
@@ -65,6 +71,7 @@ const usePlate = () => {
             } else if (state.playerIsOn) {
 
                 dispatch({ type: 'play', payload: false });
+                audio.current.stop();
                 plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
 
@@ -78,8 +85,3 @@ const usePlate = () => {
 }
 
 export default usePlate;
-
-
-//source.current = audioContext.current.createMediaElementSource(audio.current);
-//source.current.connect(audioContext.current.destination);
-//console.log('audio ' + audio.current.src);
