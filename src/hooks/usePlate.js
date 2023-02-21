@@ -31,8 +31,9 @@ const usePlate = () => {
     const audio = useRef(new Audio());
     const ss = useRef(false);
 
-    if (ss.current === false) {
+    if (!ss.current) {
         audio.current.load();
+        console.log('loaded')
     };
 
     // animation controls
@@ -101,6 +102,6 @@ const usePlate = () => {
 export default usePlate;
 
 
-  //source.current = audioContext.current.createMediaElementSource(audio.current);
-        //source.current.connect(audioContext.current.destination);
-        //console.log('audio ' + audio.current.src);
+//source.current = audioContext.current.createMediaElementSource(audio.current);
+//source.current.connect(audioContext.current.destination);
+//console.log('audio ' + audio.current.src);
