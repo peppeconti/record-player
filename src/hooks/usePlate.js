@@ -23,28 +23,29 @@ function reducer(state, action) {
 
 const usePlate = () => {
 
+    // states
     const [state, dispatch] = useReducer(reducer, initialState);
-    const audioContext = useRef(new AudioContext());
-    const audio = useRef(new Audio());
-    const source = useRef();
     const [alert, setAlert] = useState(false);
 
+    // handle audio loading
+    const audio = useRef(new Audio());
+    const ss = useRef(false);
+
+    if (ss.current === false) {
+        audio.current.load();
+    };
+
+    // animation controls
     const plateControls = useAnimationControls();
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
-    // load current audio
-   
+
     useEffect(() => {
-        audio.current.load();
-        source.current = audioContext.current.createMediaElementSource(audio.current);
-        source.current.connect(audioContext.current.destination);
-        //console.log('audio ' + audio.current.src);
+        ss.current = true;
     }, []);
 
     useEffect(() => {
         audio.current.src = state.plate.audio;
-        console.log(audio.current.src);
-        console.log(source.current);
     }, [state.plate]);
 
     const animateChange = async i => {
@@ -72,9 +73,9 @@ const usePlate = () => {
             if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
                 await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
-                if (audioContext.current.state === 'suspended') {
+                /*if (audioContext.current.state === 'suspended') {
                     audioContext.current.resume();
-                };
+                };*/
                 audio.current.play();
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 return plateControls.start({ rotate: 360, transition: { duration: 2, repeat: Infinity, ease: 'linear' } });
@@ -98,3 +99,8 @@ const usePlate = () => {
 }
 
 export default usePlate;
+
+
+  //source.current = audioContext.current.createMediaElementSource(audio.current);
+        //source.current.connect(audioContext.current.destination);
+        //console.log('audio ' + audio.current.src);
