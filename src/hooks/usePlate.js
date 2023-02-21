@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect, useRef } from 'react';
+import { useReducer, useState } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
 
@@ -27,31 +27,10 @@ const usePlate = () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const [alert, setAlert] = useState(false);
 
-    // handle audio loading
-    const audio = useRef(new Audio());
-    const ss = useRef(false);
-
-    if (!ss.current) {
-        //audio.current.src = state.plate.audio;
-        audio.current.preload = 'none'
-        audio.current.load();
-        console.log('loaded');
-    };
-
     // animation controls
     const plateControls = useAnimationControls();
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
-
-    useEffect(() => {
-        ss.current = true;
-    }, []);
-
-    useEffect(() => {
-        audio.current.src = state.plate.audio;
-        //console.log('src set')
-        console.log(audio.current)
-    }, [state.plate]);
 
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
@@ -76,12 +55,9 @@ const usePlate = () => {
         if (!state.animationIsRunning && document.readyState === 'complete') {
 
             if (!state.playerIsOn) {
+
                 dispatch({ type: 'play', payload: true });
                 await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
-                /*if (audioContext.current.state === 'suspended') {
-                    audioContext.current.resume();
-                };*/
-                audio.current.play();
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
                 return plateControls.start({ rotate: 360, transition: { duration: 2, repeat: Infinity, ease: 'linear' } });
 
@@ -91,8 +67,6 @@ const usePlate = () => {
                 dispatch({ type: 'play', payload: false });
                 plateControls.start({ rotate: 0, transition: { duration: 1.5 } })
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
-                audio.current.pause();
-                return audio.current.currentTime = 0;
 
             };
         } else {
