@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect, useCallback, useRef } from 'react';
+import { useReducer, useState, useEffect, useRef } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
 
@@ -25,18 +25,21 @@ const usePlate = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
     //const audioContext = useRef(new AudioContext());
-    const audio = useRef(new Audio(state.plate.audio));
+    const audio = useRef(new Audio());
     const [alert, setAlert] = useState(false);
 
     const plateControls = useAnimationControls();
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
     // load current audio
+    if (audio.current.src) {
+        audio.current.load();
+    };
    
-    useEffect(() => {
+    /*useEffect(() => {
         audio.current.load();
         //console.log(audio.current.src)
-    }, []);
+    }, []);*/
 
     useEffect(() => {
         audio.current.src = state.plate.audio;
