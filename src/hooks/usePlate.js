@@ -32,8 +32,9 @@ const usePlate = () => {
     const ss = useRef(false);
 
     if (!ss.current) {
+        audio.current.src = state.plate.audio;
         audio.current.load();
-        console.log('loaded')
+        console.log('loaded');
     };
 
     // animation controls
