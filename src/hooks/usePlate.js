@@ -32,17 +32,15 @@ const usePlate = () => {
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
     // load current audio
-    if (audio.current.src) {
-        audio.current.load();
-    };
    
-    /*useEffect(() => {
+    useEffect(() => {
         audio.current.load();
-        //console.log(audio.current.src)
-    }, []);*/
+        //console.log('audio ' + audio.current.src);
+    }, []);
 
     useEffect(() => {
         audio.current.src = state.plate.audio;
+        console.log(audio.current.src);
     }, [state.plate]);
 
     const animateChange = async i => {
