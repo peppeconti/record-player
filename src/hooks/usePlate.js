@@ -50,7 +50,7 @@ const usePlate = () => {
             await plateControls.start({ y: 0, rotate: 720, transition: { duration: 2, ease: 'easeOut' } });
             await plateControls.start({ scale: 1, transition: { duration: .5, ease: 'easeOut' } });
             return dispatch({ type: 'animationIsRunning' });
-        } else {
+        } else if (state.playerIsOn && tracks.indexOf(state.plate) !== i) {
             setAlert(true);
             setTimeout(() => {
                 setAlert(false)
@@ -63,23 +63,23 @@ const usePlate = () => {
         if (!state.animationIsRunning && state.plate.audio.duration()) {
 
             if (!state.playerIsOn) {
-                dispatch({type: 'animationIsRunning'});
+                dispatch({ type: 'animationIsRunning' });
                 dispatch({ type: 'play', payload: true });
                 plateControls.start({ rotate: 360, transition: { duration: 2, repeat: Infinity, ease: 'linear' } });
                 await tonearmControls.start({ rotate: 29, transition: { stiffness: 25, type: 'spring', damping: 4 } });
-                dispatch({type: 'animationIsRunning'});
+                dispatch({ type: 'animationIsRunning' });
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1.3, repeat: Infinity, ease: 'linear' } });
                 return state.plate.audio.play();
 
 
 
             } else if (state.playerIsOn) {
-                dispatch({type: 'animationIsRunning'});
+                dispatch({ type: 'animationIsRunning' });
                 dispatch({ type: 'play', payload: false });
                 state.plate.audio.stop();
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
                 await plateControls.start({ rotate: 0, transition: { duration: 2 } });
-                dispatch({type: 'animationIsRunning'});
+                dispatch({ type: 'animationIsRunning' });
             };
         } else {
             return console.log('hoooo wait!');
