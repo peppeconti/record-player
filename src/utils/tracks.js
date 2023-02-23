@@ -22,8 +22,8 @@ const tracks = [
         author: 'F.Chopin',
         work: 'Étude',
         audio: new Howl({src: etude}),
-        color1: '#c11515',
-        color2: '#ff0000'
+        color1: '#802323',
+        color2: '#BB1E1E'
     }
 ];
 
