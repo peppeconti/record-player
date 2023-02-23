@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react';
+import { useReducer, useState, useEffect } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
 
@@ -11,7 +11,7 @@ const initialState = {
 function reducer(state, action) {
     switch (action.type) {
         case 'changePlate':
-            return { ...state, plate: tracks[action.plateIndex]};
+            return { ...state, plate: tracks[action.plateIndex] };
         case 'animationIsRunning':
             return { ...state, animationIsRunning: !state.animationIsRunning };
         case 'play':
@@ -31,6 +31,14 @@ const usePlate = () => {
     const plateControls = useAnimationControls();
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
+
+    useEffect(() => {
+        state.plate.audio.on('end', () => {
+            dispatch({ type: 'play', payload: false });
+            plateControls.start({ rotate: 0, transition: { duration: 2 } });
+            tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
+        })
+    },[state.plate.audio, plateControls, tonearmControls]);
 
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
@@ -66,7 +74,7 @@ const usePlate = () => {
             } else if (state.playerIsOn) {
                 dispatch({ type: 'play', payload: false });
                 state.plate.audio.stop();
-                plateControls.start({rotate: 0, transition: {duration: 2} });
+                plateControls.start({ rotate: 0, transition: { duration: 2 } });
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
             };
         } else {
@@ -78,10 +86,3 @@ const usePlate = () => {
 }
 
 export default usePlate;
-
-
-/*dispatch({ type: 'play', payload: true });
-await tonearmControls.start({ rotate: 29, transition: { duration: 1.5, type: 'spring', damping: 9 } });
-state.plate.audio.play();
-tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1, delay: .3, repeat: Infinity, ease: 'linear' } });
-return plateControls.start({ rotate: 360 * state.plate.audio.duration() / 2, transition: { duration: state.plate.audio.duration(),ease: 'easeInOut' } });*/
