@@ -20,18 +20,18 @@ const tracks = [
         color2: '#4fd669'
     },
     {
-        author: 'F.Chopin',
-        work: 'Étude',
-        audio: new Howl({src: etude}),
-        color1: '#822a93',
-        color2: '#b13cc9'
-    },
-    {
         author: 'W.A.Mozart',
         work: 'K545',
         audio: new Howl({src: andante}),
         color1: '#9A2A2A',
         color2: '#db3f3f'
+    },
+    {
+        author: 'F.Chopin',
+        work: 'Étude',
+        audio: new Howl({src: etude}),
+        color1: '#822a93',
+        color2: '#b13cc9'
     }
 ];
 
