@@ -1,6 +1,7 @@
-import { useReducer, useState, useEffect } from 'react';
+import { useReducer, useState, useEffect, useRef } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
+import { Howl } from 'howler';
 
 const initialState = {
     plate: tracks[0],
@@ -11,7 +12,7 @@ const initialState = {
 function reducer(state, action) {
     switch (action.type) {
         case 'changePlate':
-            return { ...state, plate: tracks[action.plateIndex] };
+            return { ...state, plate: tracks[action.plateIndex]};
         case 'animationIsRunning':
             return { ...state, animationIsRunning: !state.animationIsRunning };
         case 'play':
@@ -32,9 +33,13 @@ const usePlate = () => {
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
 
+    const audio = useRef(null)
+
     useEffect(() => {
-        console.log(state.plate.audio.duration());
-    })
+        audio.current = new Howl({src: tracks[0].audio, onload: () => console.log('loaded')})
+        //console.log(state.audio)
+        //state.audio._onload = () => console.log('ciao');
+    }, [state.plate])
 
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
@@ -56,26 +61,26 @@ const usePlate = () => {
     };
 
     const play = async () => {
-        if (!state.animationIsRunning && document.readyState === 'complete') {
+        if (!state.animationIsRunning) {
 
-            const duration = state.plate.audio.duration();
+            const duration = audio.current.duration();
 
             if (!state.playerIsOn) {
                 dispatch({ type: 'play', payload: true });
-                await plateControls.start({ rotate: 360*2, transition: { duration: 2*2, ease: 'linear' } });
-                plateControls.start({ rotate: 360*duration/2, transition: { duration: duration, ease: 'linear' } });
+                await plateControls.start({ rotate: 360 * 2, transition: { duration: 2 * 2, ease: 'linear' } });
+                plateControls.start({ rotate: 360 * duration / 2, transition: { duration: duration, ease: 'linear' } });
                 await tonearmControls.start({ rotate: 29, transition: { stiffness: 25, type: 'spring', damping: 4 } });
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1.3, repeat: Infinity, ease: 'linear' } });
-                return state.plate.audio.play();
+                return audio.current.play();
 
-              
+
 
             } else if (state.playerIsOn) {
-                console.log('seek: ' + state.plate.audio.seek());
                 dispatch({ type: 'play', payload: false });
-                state.plate.audio.stop();
+                audio.current.stop();
                 plateControls.stop();
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
+                plateControls.set({ rotate: 0 });
 
             };
         } else {

@@ -11,7 +11,7 @@ const Base = () => {
 
     return (
         <>
-            <div className={classes.base}>
+           <div className={classes.base}>
                 {state.plate && <Plate author={state.plate.author} work={state.plate.work} dark={state.plate.color1} light={state.plate.color2} controls={plateControls} />}
                 <Platter />
                 <Tonearm controls={tonearmControls} />
