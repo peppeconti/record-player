@@ -33,10 +33,12 @@ const usePlate = () => {
     const tonearmControls = useAnimationControls();
 
     useEffect(() => {
-        state.plate.audio.on('end', () => {
+        state.plate.audio.on('end', async () => {
+            dispatch({ type: 'animationIsRunning' });
             dispatch({ type: 'play', payload: false });
             plateControls.start({ rotate: 0, transition: { duration: 2 } });
-            tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
+            await tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
+            dispatch({ type: 'animationIsRunning' });
         })
     }, [state.plate.audio, plateControls, tonearmControls]);
 

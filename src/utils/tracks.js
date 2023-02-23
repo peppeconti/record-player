@@ -1,6 +1,7 @@
 import adagio from '../assets/audio/bach_largo.mp3';
-import traviata from '../assets/audio/verdi_traviata.mp3';
+import inverno from '../assets/audio/vivaldi_inverno.mp3';
 import etude from '../assets/audio/chopin_op10.mp3';
+import andante from '../assets/audio/mozart_andante.mp3';
 import { Howl } from 'howler';
 
 const tracks = [
@@ -12,18 +13,25 @@ const tracks = [
         color2: '#5d70d7'
     },
     {
-        author: 'G.Verdi',
-        work: 'La traviata',
-        audio: new Howl({src: traviata}),
+        author: 'A.Vivaldi',
+        work: 'L\'inverno',
+        audio: new Howl({src: inverno}),
         color1: '#39a337',
-        color2: '#4bd648'
+        color2: '#4fd669'
     },
     {
         author: 'F.Chopin',
         work: 'Étude',
         audio: new Howl({src: etude}),
-        color1: '#802323',
-        color2: '#BB1E1E'
+        color1: '#822a93',
+        color2: '#b13cc9'
+    },
+    {
+        author: 'W.A.Mozart',
+        work: 'K545',
+        audio: new Howl({src: andante}),
+        color1: '#9A2A2A',
+        color2: '#db3f3f'
     }
 ];
 
