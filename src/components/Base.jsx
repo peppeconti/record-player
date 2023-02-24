@@ -14,11 +14,6 @@ const Base = () => {
 
     const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange, alert, audioEnd } = usePlate(audioPlayer);
 
-    const loading = () => {
-        console.log('loaded');
-        setLoaded(true);
-    }
-
     return (
         <>
             <audio ref={audioPlayer} src={state.plate.audio} preload='metadata' onEnded={audioEnd} />
