@@ -26,7 +26,6 @@ const usePlate = (audio) => {
     // states
     const [state, dispatch] = useReducer(reducer, initialState);
     const [alert, setAlert] = useState(false);
-    const [loaded, setLoaded] = useState(false);
 
     // animation controls
     const plateControls = useAnimationControls();
@@ -95,7 +94,7 @@ const usePlate = (audio) => {
         }
     }
 
-    return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls, alert, loaded, setLoaded, audioEnd };
+    return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls, alert, audioEnd };
 }
 
 export default usePlate;
