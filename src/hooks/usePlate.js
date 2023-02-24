@@ -1,4 +1,4 @@
-import { useReducer, useState, useEffect } from 'react';
+import { useReducer, useState } from 'react';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
 
@@ -35,13 +35,17 @@ const usePlate = (audio) => {
 
     /*useEffect(() => {
         state.plate.audio.on('end', async () => {
-            dispatch({ type: 'animationIsRunning' });
-            dispatch({ type: 'play', payload: false });
-            plateControls.start({ rotate: 0, transition: { duration: 2 } });
-            await tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
-            dispatch({ type: 'animationIsRunning' });
+           
         })
     }, [state.plate.audio, plateControls, tonearmControls]);*/
+
+    const audioEnd = async () => {
+        dispatch({ type: 'animationIsRunning' });
+        dispatch({ type: 'play', payload: false });
+        plateControls.start({ rotate: 0, transition: { duration: 2 } });
+        await tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
+        dispatch({ type: 'animationIsRunning' });
+    }
 
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
@@ -91,7 +95,7 @@ const usePlate = (audio) => {
         }
     }
 
-    return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls, alert, loaded, setLoaded };
+    return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls, alert, loaded, setLoaded, audioEnd };
 }
 
 export default usePlate;
