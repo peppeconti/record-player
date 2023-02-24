@@ -23,4 +23,4 @@ const Plate = ({ author, work, controls, dark, light }) => {
     );
 }
 
-export default memo(Plate);
+export default Plate;

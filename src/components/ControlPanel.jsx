@@ -33,4 +33,4 @@ const ControlPanel = ({ tracks, controls, on, play, animateChange, alert }) => {
     );
 }
 
-export default memo(ControlPanel);
+export default ControlPanel;

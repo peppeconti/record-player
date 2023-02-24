@@ -8,4 +8,4 @@ const Platter = () => {
     );
 }
 
-export default memo(Platter);
+export default Platter;

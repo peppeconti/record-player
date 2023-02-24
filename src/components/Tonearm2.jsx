@@ -21,4 +21,4 @@ const Tonearm = ({ controls }) => {
     );
 }
 
-export default memo(Tonearm);;
+export default Tonearm;

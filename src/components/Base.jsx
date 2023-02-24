@@ -12,7 +12,7 @@ const Base = () => {
 
     const [loaded, setLoaded] = useState(false);
 
-    const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange, alert,  audioEnd } = usePlate(audioPlayer);
+    const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange, alert, audioEnd } = usePlate(audioPlayer);
 
     const loading = () => {
         console.log('loaded');
