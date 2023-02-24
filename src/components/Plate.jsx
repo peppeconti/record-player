@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import classes from './Plate.module.scss';
 import { motion as m } from "framer-motion";
 

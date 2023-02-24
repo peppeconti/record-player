@@ -1,5 +1,5 @@
 import classes from './Base.module.scss';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Plate from './Plate';
 import Platter from './Platter';
 import Tonearm from './Tonearm2';
@@ -9,8 +9,6 @@ import usePlate from '../hooks/usePlate';
 const Base = () => {
 
     const audioPlayer = useRef();
-
-    const [loaded, setLoaded] = useState(false);
 
     const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange, alert, audioEnd } = usePlate(audioPlayer);
 

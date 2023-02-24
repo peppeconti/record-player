@@ -1,5 +1,4 @@
 import classes from './ControlPanel.module.scss';
-import { memo } from 'react';
 import { motion as m } from 'framer-motion';
 
 const ControlPanel = ({ tracks, controls, on, play, animateChange, alert }) => {
