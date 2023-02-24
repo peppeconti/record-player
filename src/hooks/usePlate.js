@@ -21,18 +21,19 @@ function reducer(state, action) {
     }
 }
 
-const usePlate = () => {
+const usePlate = (audio) => {
 
     // states
     const [state, dispatch] = useReducer(reducer, initialState);
     const [alert, setAlert] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
     // animation controls
     const plateControls = useAnimationControls();
     const switchPlateControls = useAnimationControls();
     const tonearmControls = useAnimationControls();
 
-    useEffect(() => {
+    /*useEffect(() => {
         state.plate.audio.on('end', async () => {
             dispatch({ type: 'animationIsRunning' });
             dispatch({ type: 'play', payload: false });
@@ -40,7 +41,7 @@ const usePlate = () => {
             await tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
             dispatch({ type: 'animationIsRunning' });
         })
-    }, [state.plate.audio, plateControls, tonearmControls]);
+    }, [state.plate.audio, plateControls, tonearmControls]);*/
 
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
@@ -71,14 +72,16 @@ const usePlate = () => {
                 await tonearmControls.start({ rotate: 29, transition: { stiffness: 25, type: 'spring', damping: 4 } });
                 dispatch({ type: 'animationIsRunning' });
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1.3, repeat: Infinity, ease: 'linear' } });
-                return state.plate.audio.play();
+                audio.current.play();
+                return;
 
 
 
             } else if (state.playerIsOn) {
                 dispatch({ type: 'animationIsRunning' });
                 dispatch({ type: 'play', payload: false });
-                state.plate.audio.stop();
+                audio.current.pause();
+                audio.current.currentTime = 0;
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
                 await plateControls.start({ rotate: 0, transition: { duration: 2 } });
                 dispatch({ type: 'animationIsRunning' });
@@ -88,7 +91,7 @@ const usePlate = () => {
         }
     }
 
-    return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls, alert };
+    return { tracks, state, play, animateChange, plateControls, switchPlateControls, tonearmControls, alert, loaded, setLoaded };
 }
 
 export default usePlate;

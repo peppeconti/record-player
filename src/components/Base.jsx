@@ -1,4 +1,5 @@
 import classes from './Base.module.scss';
+import { useRef } from 'react';
 import Plate from './Plate';
 import Platter from './Platter';
 import Tonearm from './Tonearm2';
@@ -7,16 +8,25 @@ import usePlate from '../hooks/usePlate';
 
 const Base = () => {
 
-    const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange, alert } = usePlate();
+    const audioPlayer = useRef();
+
+    const { tracks, state, plateControls, switchPlateControls, tonearmControls, play, animateChange, alert, loaded, setLoaded } = usePlate(audioPlayer);
 
     return (
         <>
-           <div className={classes.base}>
+            <audio ref={audioPlayer} src={state.plate.audio} preload='metadata' onLoadedMetadata={
+                () => {
+                    console.log('loaded');
+                    setLoaded(true);
+                }
+            } />
+            {loaded && <div className={classes.base}>
                 {state.plate && <Plate author={state.plate.author} work={state.plate.work} dark={state.plate.color1} light={state.plate.color2} controls={plateControls} />}
                 <Platter />
                 <Tonearm controls={tonearmControls} />
                 <Control tracks={tracks} alert={alert} controls={switchPlateControls} on={state.playerIsOn} play={play} animateChange={animateChange} />
-            </div>
+            </div>}
+            {!loaded && <div>Loading...</div>}
         </>
     );
 }
