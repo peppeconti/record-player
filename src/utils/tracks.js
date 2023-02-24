@@ -8,21 +8,21 @@ const tracks = [
     {
         author: 'J.S.Bach',
         work: 'BWV 1056',
-        audio: new Howl({src: adagio}),
+        audio: new Howl({src: adagio, preload: 'metadata'}),
         color1: '#293ca5',
         color2: '#5d70d7'
     },
     {
         author: 'A.Vivaldi',
         work: 'L\'inverno',
-        audio: new Howl({src: inverno}),
+        audio: new Howl({src: inverno, preload: 'metadata'}),
         color1: '#39a337',
         color2: '#4fd669'
     },
     {
         author: 'W.A.Mozart',
         work: 'K545',
-        audio: new Howl({src: andante}),
+        audio: new Howl({src: andante, preload: 'metadata'}),
         color1: '#9A2A2A',
         color2: '#db3f3f'
     },
