@@ -62,7 +62,7 @@ const usePlate = () => {
     };
 
     const play = async () => {
-        if (!state.animationIsRunning && state.plate.audio.duration()) {
+        if (!state.animationIsRunning) {
 
             if (!state.playerIsOn) {
                 dispatch({ type: 'animationIsRunning' });
