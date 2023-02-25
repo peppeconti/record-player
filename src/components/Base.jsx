@@ -6,6 +6,7 @@ import Tonearm from './Tonearm2';
 import Control from './ControlPanel';
 import tracks from '../utils/tracks.js';
 import { useAnimationControls } from 'framer-motion';
+import { Howl } from 'howler';
 
 const initialState = {
     plate: tracks[0],
@@ -28,22 +29,15 @@ function reducer(state, action) {
 
 const Base = () => {
 
-     // states
-     const [state, dispatch] = useReducer(reducer, initialState);
-     const [alert, setAlert] = useState(false);
-     const [loaded, setLoaded] = useState(false);
- 
-     // animation controls
-     const plateControls = useAnimationControls();
-     const switchPlateControls = useAnimationControls();
-     const tonearmControls = useAnimationControls();
+    // states
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const [alert, setAlert] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
-    const audio = useRef();
-
-    const loading = () => {
-        console.log('loaded');
-        setLoaded(true);
-    };
+    // animation controls
+    const plateControls = useAnimationControls();
+    const switchPlateControls = useAnimationControls();
+    const tonearmControls = useAnimationControls();
 
     const audioEnd = async () => {
         dispatch({ type: 'animationIsRunning' });
@@ -53,6 +47,13 @@ const Base = () => {
         dispatch({ type: 'animationIsRunning' });
     }
 
+    const loading = () => {
+        console.log('loaded');
+        setLoaded(true);
+    };
+    
+    const audio = useRef(new Howl({ src: state.plate.audio, onend: audioEnd }));
+    
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
             dispatch({ type: 'animationIsRunning' });
@@ -104,7 +105,7 @@ const Base = () => {
 
     return (
         <>
-            <audio ref={audio} src={state.plate.audio} preload='metadata' onLoadedMetadata={loading} onEnded={audioEnd} />
+            <audio src={state.plate.audio} preload='metadata' onLoadedMetadata={loading} onEnded={audioEnd} />
             {loaded && <div className={classes.base}>
                 {state.plate && <Plate author={state.plate.author} work={state.plate.work} dark={state.plate.color1} light={state.plate.color2} controls={plateControls} />}
                 <Platter />
