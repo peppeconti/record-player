@@ -1,5 +1,5 @@
 import classes from './Base.module.scss';
-import { useRef, useState, useReducer, } from 'react';
+import { useRef, useState, useReducer, useEffect } from 'react';
 import Plate from './Plate';
 import Platter from './Platter';
 import Tonearm from './Tonearm2';
@@ -53,7 +53,11 @@ const Base = () => {
     };
     
     const audio = useRef(new Howl({ src: state.plate.audio, onend: audioEnd }));
-    
+
+    useEffect(() => {
+        audio.current = new Howl({ src: state.plate.audio, onend: audioEnd });
+    }, [state.plate.audio])
+
     const animateChange = async i => {
         if (tracks.indexOf(state.plate) !== i && !state.playerIsOn && !state.animationIsRunning) {
             dispatch({ type: 'animationIsRunning' });
@@ -92,8 +96,7 @@ const Base = () => {
             } else if (state.playerIsOn) {
                 dispatch({ type: 'animationIsRunning' });
                 dispatch({ type: 'play', payload: false });
-                audio.current.pause();
-                audio.current.currentTime = 0;
+                audio.current.stop();
                 tonearmControls.start({ rotate: 0, transition: { duration: 1.3, ease: 'easeOut' } });
                 await plateControls.start({ rotate: 0, transition: { duration: 2 } });
                 dispatch({ type: 'animationIsRunning' });
