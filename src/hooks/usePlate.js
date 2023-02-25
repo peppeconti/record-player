@@ -75,6 +75,7 @@ const usePlate = (audio) => {
                 await tonearmControls.start({ rotate: 29, transition: { stiffness: 25, type: 'spring', damping: 4 } });
                 dispatch({ type: 'animationIsRunning' });
                 tonearmControls.start({ rotate: [29.5, 29, 28.5, 29, 29.5], transition: { duration: 1.3, repeat: Infinity, ease: 'linear' } });
+                console.log(audio);
                 audio.current.play();
                 return;
 
